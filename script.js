@@ -28,6 +28,7 @@ searchInput.addEventListener("keypress", (e) => {
 async function searchUser() {
   const username = searchInput.value.trim();
 
+
   if (!username) return alert("Please enter a username");
 
   try {
@@ -158,3 +159,50 @@ function formatDate(dateString) {
     day: "numeric",
   });
 }
+
+//search auto suggestions
+const searchhInput = document.getElementById("search");
+const suggestionsBox = document.getElementById("suggestions");
+searchhInput.addEventListener("input", async () => {
+    const query = searchhInput.value.trim();
+
+    if (query.length < 2) {
+        suggestionsBox.classList.add("hidden");
+        return;
+    }
+
+    const res = await fetch(`https://api.github.com/search/users?q=${query}`);
+    const data = await res.json();
+
+    showSuggestions(data.items);
+});
+function showSuggestions(users) {
+    if (!users || users.length === 0) {
+        suggestionsBox.classList.add("hidden");
+        return;
+    }
+
+    suggestionsBox.innerHTML = ""; 
+
+    users.slice(0, 5).forEach(user => {
+        const li = document.createElement("li");
+        li.textContent = user.login;
+
+        li.addEventListener("click", () => {
+            searchhInput.value = user.login;
+            suggestionsBox.classList.add("hidden");
+        });
+
+        suggestionsBox.appendChild(li);
+    });
+
+    suggestionsBox.classList.remove("hidden");
+}
+document.addEventListener("click", (e) => {
+    if (e.target !== searchhInput) {
+        suggestionsBox.classList.add("hidden");
+    }
+});
+
+
+
