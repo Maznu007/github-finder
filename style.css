@@ -206,5 +206,97 @@ margin-right: 8px;
     margin-bottom: 15px;
     color: var(--primary-color);
     font-size: 1.25rem;
-    
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--text-gray);
+}
+.repos-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(250px,1fr));
+    gap: 15px;
+}
+.repo-card{
+    background-color: var(--card-bg);
+    padding: 15px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-md);
+    transition: transform 0.2s, background-color 0.3s;
+}
+.repo-card:hover{
+    transform: translateY(-4px);
+    background-color: var(--primary-light);
+}
+.repo-name{
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--text-light);
+    text-decoration: none;
+    display: block;
+}
+.repo-name:hover{
+    text-decoration: underline;
+}
+.repo-description{
+    font-size: 0.95rem;
+    color: var(--text-gray);
+    margin-bottom: 10px;
+    overflow: hidden;
+    min-height: 35px;
+}
+.repo-meta {
+  display: flex;
+  gap: 15px;
+  font-size: 0.85rem;
+  color: var(--text-gray);
+}
+
+.repo-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.repo-meta-item i {
+  color: var(--primary-color);
+}
+
+.loading-repos {
+  color: var(--text-gray);
+  text-align: center;
+  padding: 20px;
+  grid-column: 1 / -1;
+}
+
+.no-repos {
+  color: var(--text-gray);
+  text-align: center;
+  padding: 30px;
+  grid-column: 1 / -1;
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+  border-radius: var(--border-radius);
+}
+
+/* Responsive design for mobile devices */
+@media (max-width: 600px) {
+  .profile-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .location-date {
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .stats,
+  .additional-info {
+    flex-direction: column;
+    grid-template-columns: 1fr;
+  }
+
+  .info-item {
+    justify-content: center;
+  }
 }
